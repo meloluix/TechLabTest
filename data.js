@@ -1,0 +1,28 @@
+const COURSES=[
+{id:'ia',name:'Inteligência artificial',group:'Núcleo WIT',desc:'Entenda como as máquinas são treinadas para realizar tarefas e crie projetos usando IA de forma criativa e consciente.',project:'Experimente treinar um classificador de imagens e investigue por que ele erra.',areas:'Computação, Ciência de Dados e pesquisa em inteligência artificial.'},
+{id:'com',name:'Comunicação digital',group:'Núcleo WIT',desc:'Crie podcasts, edite fotos e produza vídeos com câmera e equipamentos de estúdio. Explore a criação de conteúdo para a internet.',project:'Planeje um episódio de podcast ou um vídeo curto para um público específico.',areas:'Comunicação, Publicidade, Jornalismo e produção audiovisual.'},
+{id:'games',name:'Oficina de games',group:'Núcleo WIT',desc:'Desenvolva seus próprios jogos: crie personagens e cenários, programe mecânicas e explore o universo dos games.',project:'Crie uma fase com objetivo, regras e um desafio que possa ser testado.',areas:'Jogos Digitais, Design e desenvolvimento de software.'},
+{id:'meta',name:'Metaverso',group:'Núcleo WIT',desc:'Explore mundos virtuais, crie avatares e ambientes 3D e descubra diferenças entre Realidade Aumentada e Realidade Virtual.',project:'Modele um ambiente virtual e pense em como uma pessoa vai explorá-lo.',areas:'Design 3D, Computação Gráfica e experiências imersivas.'},
+{id:'casa',name:'Ambientes inteligentes',group:'Núcleo WIT',desc:'Explore a automação de ambientes e o uso de assistentes como Alexa e Google para controlar lâmpadas, televisões e outros dispositivos.',project:'Planeje uma rotina de iluminação automática que responda a uma necessidade real.',areas:'Automação, Internet das Coisas e integração de sistemas.'},
+{id:'maker',name:'Robótica e cultura maker',group:'TechLab Maker',desc:'Transforme ideias em objetos e protótipos. Combine modelagem e impressão 3D, eletrônica, programação, robótica e ferramentas de fabricação.',project:'Construa um protótipo com sensor e uma peça criada por você.',areas:'Engenharias, Design de Produto, Mecatrônica e fabricação digital.'}
+];
+// Cada curso aparece cinco vezes. Escolher uma opção soma 1 ao curso;
+// escolher ambas soma 1 aos dois; nenhuma soma 0. Não há desempate oculto.
+const QUESTIONS=[
+{title:'Você vai criar algo para uma feira. O que desperta sua curiosidade?',a:0,b:1,options:['Ensinar uma IA a reconhecer imagens e investigar seus erros.','Gravar uma entrevista e editar um vídeo que conte uma boa história.']},
+{title:'Você tem uma tarde para experimentar uma ideia. Qual escolheria?',a:2,b:3,options:['Criar as regras e os desafios de uma fase de jogo.','Construir um mundo virtual que as pessoas possam explorar.']},
+{title:'Que tipo de solução você gostaria de testar?',a:4,b:5,options:['Fazer a iluminação de um ambiente funcionar automaticamente.','Montar um protótipo físico com peças, sensores e ferramentas.']},
+{title:'Num projeto digital, qual problema você gostaria de resolver?',a:0,b:2,options:['Descobrir quais exemplos ajudam uma IA a aprender melhor.','Ajustar a dificuldade de um jogo para ele ficar divertido.']},
+{title:'Você quer apresentar uma ideia de um jeito diferente. Qual caminho atrai mais?',a:1,b:3,options:['Produzir um podcast ou vídeo com roteiro, som e edição.','Criar um ambiente 3D com avatares para apresentar a ideia.']},
+{title:'Qual desafio faria você querer investigar mais?',a:0,b:4,options:['Entender por que uma IA deu uma resposta inadequada.','Entender como um assistente virtual controla aparelhos de uma casa.']},
+{title:'Qual projeto você gostaria de tirar do papel?',a:1,b:5,options:['Produzir fotos e vídeos para divulgar uma criação.','Construir uma criação física e ajustar suas peças até funcionar.']},
+{title:'Você vai planejar uma experiência interativa. O que prefere explorar?',a:2,b:4,options:['Programar pontuação, movimento e desafios em um jogo.','Criar uma rotina automática para lâmpadas e outros aparelhos.']},
+{title:'Como você gostaria de trabalhar com formas e espaços?',a:3,b:5,options:['Criar cenários e objetos para um mundo virtual.','Modelar um objeto e transformá-lo em peça física na impressora 3D.']},
+{title:'Qual tecnologia você gostaria de compreender por dentro?',a:0,b:3,options:['Como uma máquina aprende padrões a partir de exemplos.','Como realidade aumentada e virtual mudam nossa experiência de um espaço.']},
+{title:'Em uma equipe criativa, que tarefa você gostaria de assumir?',a:1,b:2,options:['Preparar um roteiro e editar a comunicação para o público.','Criar personagens e mecânicas que tornem um jogo interessante.']},
+{title:'Qual resultado faria você sentir vontade de continuar o projeto?',a:3,b:4,options:['Uma pessoa conseguir explorar o ambiente virtual que você criou.','Um ambiente reagir automaticamente às necessidades das pessoas.']},
+{title:'Se pudesse acompanhar um experimento, qual seria?',a:0,b:5,options:['Comparar resultados de uma IA treinada com diferentes exemplos.','Testar um mecanismo ou robô e ajustar sua montagem.']},
+{title:'Qual melhoria você gostaria de oferecer a outras pessoas?',a:1,b:4,options:['Comunicar uma ideia com um vídeo, uma foto ou um podcast bem produzido.','Automatizar tarefas de uma casa ou de uma sala para facilitar a rotina.']},
+{title:'Para concluir um desafio, o que você teria mais vontade de fazer?',a:2,b:5,options:['Testar e corrigir as regras e a programação de um jogo.','Testar e corrigir peças e conexões de um protótipo físico.']}
+];
+function rankAnswers(answers){const scores=COURSES.map(()=>0);answers.forEach((v,i)=>{if(v==='a'||v==='both')scores[QUESTIONS[i].a]++;if(v==='b'||v==='both')scores[QUESTIONS[i].b]++;});return scores.map((score,i)=>({index:i,score})).sort((a,b)=>b.score-a.score||a.index-b.index);}
